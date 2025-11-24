@@ -15,7 +15,7 @@
 <% } %>
 
 <div id="Form">
-    <form >
+    <form action="/account/login" method="post">
       <label for="account_email" aria-label="Account Email">Email:</label><br>
       <input type="email" name="account_email" id="account_email" required value="<%= locals.account_email %>"><br>
       <label for="account_password" aria-label="Account Password">Password:</label><br>
