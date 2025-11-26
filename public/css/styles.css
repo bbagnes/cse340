@@ -168,11 +168,11 @@ div #Form label, div #Form input {
 }
 
 input:focus:invalid {
-  background-color: rgba(255, 0, 0, 0.7);
+  background-color: rgba(249, 57, 57, .7);
 }
 
 input:focus:valid {
-  background-color: rgba(0, 255, 0, 0.7);
+  background-color: rgba(57, 255, 57, .7);
 }
 
 div #loginForm p, div #registerForm p {
@@ -335,11 +335,15 @@ div.namePrice span {
   font-weight: 800;
 }
 
-/* #manageInv {
+div #manageInv {
   display: block;
-  background-color: var(--secondary-color);
-   border: var(--border2);
-   padding: 10px;
+  margin: 10px;
+  padding: 10px;   
+}
+
+#manageInv a {
+  display: block;
+  padding: 2px;
 }
 
 #manageAcc {

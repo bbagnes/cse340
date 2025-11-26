@@ -17,6 +17,7 @@ const utilities = require("./utilities/");
 const session = require("express-session");
 const pool = require('./database/');
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
 /* ***********************
  * Middleware
@@ -33,14 +34,20 @@ const bodyParser = require("body-parser");
 }));
 
 // Express Messages Middleware
-app.use(require('connect-flash')())
+app.use(require('connect-flash')());
 app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 });
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
+// Cookie Parsing tool to aid use of cookies.
+app.use(cookieParser());
+
+// Apply the JSON WEb Token Token check universally.
+app.use(utilities.checkJWTToken);
 
 /* **************************
  * View Engine and Templates
