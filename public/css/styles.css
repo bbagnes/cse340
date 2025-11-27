@@ -161,6 +161,23 @@ div #Form {
   border-radius: 6px;
 }
 
+div #invDisplay {
+  display: block;
+  align-content: space-around;
+  justify-content: left;
+  background-color: var(--accent3-color);
+  color:var(--accent1-color);
+  font-size: 1.5rem;
+  margin: 10px auto;
+  min-width: 280px;
+  width: 80%;
+  max-width: 520px;
+  min-height: 0px;
+  height: auto;
+  border: 3px solid var(--secondary-color);
+  border-radius: 6px;
+}
+
 div #Form label, div #Form input {
   height: 35px;
   width: 220px;
@@ -182,7 +199,7 @@ div #loginForm p, div #registerForm p {
 div #submitButton {
   justify-self:center;
   text-align: center;
-  max-width: 100px;
+  max-width: 180px;
   font-size: 1.2rem;
   font-weight: 600;
   padding: 5px;
@@ -337,6 +354,7 @@ div.namePrice span {
 
 div #manageInv {
   display: block;
+  width: 100%;
   margin: 10px;
   padding: 10px;   
 }
@@ -349,16 +367,6 @@ div #manageInv {
 #manageAcc {
   font-size: larger;
   font-weight: 700;
-} */
-
-#vehicle-display {
-  display: block;
-  background-color: var(--accent3-color);
-  font-size: larger;
-  padding: 5px;
-  margin: 0 auto;
-  border: var(--border2);
-  border-radius: 6px;
 }
 
 section.vehImage {

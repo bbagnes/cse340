@@ -18,14 +18,14 @@
   <form action="/inv/addvehicle" method="post">
     <p>ALL FIELDS ARE REQUIRED.</p><br>
     <fieldset>
-    <<label for="classification_id" aria-label="Select a classification" >Classification</label><br>
-    <%- classList %>
+    <label for="classification_id" aria-label="Select a classification">Classification</label><br>
+    <%- classList %><br>
     <label for="inv_make" aria-label="Enter the make">Make</label><br>
     <input type="text" name="inv_make" id="inv_make" required pattern="[a-zA-Z0-9-]{3,}" placeholder="Min of 3 characters" value="<%= locals.inv_make %>"><br>
     <label for="inv_model" aria-label="Enter the model">Model</label><br>
     <input type="text" name="inv_model" id="inv_model" required pattern="[A-Za-z0-9-]{3,}" placeholder="Min of 3 characters" value="<%= locals.inv_model %>"><br>
     <label for="inv_description" aria-label="Enter a vehicle description">Make</label><br>
-    <textarea name="inv_description" id="inv_description" required maxlength="300" value="<%= locals.inv_description %>"><br>
+    <textarea name="inv_description" id="inv_description" required maxlength="300" value="<%= locals.inv_description %>"></textarea><br>
     <label for="inv_image" aria-label="Please select the image file for this vehicle.">Image Path</label><br>
     <input type="file" name="inv_image" id="inv_image" required value="/images/vehicles/no-image.png"><br>
     <label for="inv_thumbnail" aria-label="Please select the thumbnail image file for this vehicle.">Thumbnail Path</label><br>

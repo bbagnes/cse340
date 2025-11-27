@@ -17,11 +17,11 @@ router.get("/detail/:vehicleId", utilities.handleErrors(invController.buildVehic
 // Route to build the Add New Classification view
 router.get("/addClass", utilities.handleErrors(invController.buildNewClassificationView));
 
-// // Route to Add a New Classification
-// router.post("/addClass",
-//     invValidate.classificationRules,
-//     invValidate.checkNewClassificationData,
-//     utilities.handleErrors(invController.));
+// Route to Add a New Classification
+router.post("/addClass",
+    invValidate.classificationRules,
+    invValidate.checkNewClassificationData,
+    utilities.handleErrors(invController.addNewClassification));
 
 // Route to build the Add New Vehicle view
 router.get("/addVehicle", utilities.handleErrors(invController.addNewVehicle));
@@ -32,10 +32,19 @@ router.post("/addVehicle",
     invValidate.checkNewVehicleData,
     utilities.handleErrors(invController.registerNewVehicle));
 
-// Route to manage inventory items
+// Route to manage inventory items 
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
+
+// Route to edit inventory items on Inventory Management page.
+router.get("/edit/:invId", utilities.handleErrors(invController.editVehicleIDetails));
 
 // Route to generate Server Error
 router.get("/errorTest", utilities.handleErrors(invController.serverError));
+
+// Route to update edits to inventory item
+router.post("/update/", 
+    invValidate.newVehicleRules,
+    invValidate.checkUpdateData,
+    utilities.handleErrors(invController.updateInventory));
 
 module.exports = router;

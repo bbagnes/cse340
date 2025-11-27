@@ -1,0 +1,47 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<div id="Form">  
+  <form action="/inv/update" method="post">
+    <p>ALL FIELDS ARE REQUIRED.</p><br>
+    <fieldset>
+      <label for="classification_id" aria-label="Select a classification">Classification</label><br>
+      <%- classificationSelect %><br>
+      <label for="inv_make" aria-label="Edit the make">Make</label><br>
+      <input type="text" name="inv_make" id="inv_make" required pattern="[a-zA-Z0-9-]{3,}" placeholder="Min of 3 characters" value="<%= locals.inv_make %>"><br>
+      <label for="inv_model" aria-label="Edit the model">Model</label><br>
+      <input type="text" name="inv_model" id="inv_model" required pattern="[A-Za-z0-9-]{3,}" placeholder="Min of 3 characters" value="<%= locals.inv_model %>"><br>
+      <label for="inv_description" aria-label="Edit vehicle description">Description</label><br>
+      <textarea name="inv_description" id="inv_description" required maxlength="300" value="<%= locals.inv_description %>"></textarea><br>
+      <label for="inv_image" aria-label="Edit image file for this vehicle.">Image File</label><br>
+      <input type="file" name="inv_image" id="inv_image" required value="<%= locals.inv_image %>"><br>
+      <label for="inv_thumbnail" aria-label="Edit thumbnail image file for this vehicle.">Thumbnail file</label><br>
+      <input type="file" name="inv_thumbnail" id="inv_thumbnail" required value="<%= locals.inv_thumbnail %>"><br>
+      <label for="inv_price" aria-label="Edit vehicle price; numbers only">Price</label><br>
+      <input type="text" name="inv_price" id="inv_price" pattern="^\d*\.\d{2}$" required placeholder="decimal or integer" value="<%= locals.inv_price %>"><br>
+      <label for="inv_year" aria-label="Edit vehicle year">Year</label><br>
+      <input type="number" name="inv_year" id="inv_year" min="4" max="4" required placeholder="4-digit year" value="<%= locals.inv_year %>"><br>
+      <label for="inv_miles" aria-label="Enter the vehicle mileage, digits only">Mileage</label><br>
+      <input type="number" name="inv_miles" id="inv_miles" required placeholder="digits only" value="<%= locals.inv_miles %>"><br>
+      <label for="inv_color" aria-label="Edit vehicle color">Color</label><br>
+      <input type="text" name="inv_color" id="inv_color" required value="<%= locals.inv_color %>"><br>
+      <input id="submitButton" type="submit" name="submit" value="Update Vehicle">
+      <input type="hidden" name="inv_id"
+      <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+      <% } %>>
+    </fieldset>    
+  </form>
+</div>

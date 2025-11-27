@@ -38,10 +38,10 @@ invCont.buildVehicleView = async function (req, res, next) {
  * ******************************* */
 invCont.buildManagementView = async function (req, res, next) {
   let nav = await utilities.getNav();
-  const classificationSelect = await utilities.buildClassificationList()
-  const vehicleTitle = "Manage Inventory";
+  const classificationSelect = await utilities.buildClassificationList();
+  const vehicleTitle = "Vehicle Management";
   res.render("./inventory/invmanagement", {
-    title: vehicleTitle, nav, classificationSelect,
+    title: vehicleTitle, nav, errors: null, classificationSelect,
   });
 }
 
@@ -65,6 +65,30 @@ invCont.addNewVehicle = async function (req, res, next) {
   res.render("./inventory/addvehicle", {
     title: vehicleTitle, nav, errors: null,
   });
+}
+
+/* ****************************************
+*  Process new vehicle Registration
+* *************************************** */
+invCont.addNewClassification = async function (req, res) {
+  let nav = await utilities.getNav()
+  const { } = req.body
+  const regResult = await invModel.registerClassification(
+    classification_name, 
+  )  
+
+  if (regResult) {
+    req.flash(
+      "notice",
+      `Congratulations, the ${classification_name} Class was sucessfully added.`
+    )
+    res.status(201).render("/inventory/management", {
+      title: "Vehicle Management", nav, errors: null, })
+  } else {
+    req.flash("notice", "Sorry, the vehicle registration failed.")
+    res.status(501).render("inventory/addclassification", {
+      title: "Add New Classification", nav, errors: null, })
+  }
 }
 
 /* ****************************************
@@ -125,6 +149,94 @@ invCont.getInventoryJSON = async (req, res, next) => {
     return res.json(invData)
   } else {
     next(new Error("No data returned"))
+  }
+}
+
+/* ****************************************
+*  Edit Vehicle Detailis in Inventory
+* *************************************** */
+invCont.editVehicleIDetails = async function (req, res) {
+  const invId = parseInt(req.params.invId);
+   let nav = await utilities.getNav()
+  const itemData = await invModel.getInventoryByVehicleId(invId);
+  const classificationSelect = await utilities.buildClassificationList(itemData.classification_id);
+  const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+  res.render("./inventory/editvehicle", {
+    title: "Edit " + itemName,
+    nav,
+    classificationSelect: classificationSelect,
+    errors: null,
+    inv_id: itemData.inv_id,
+    inv_make: itemData.inv_make,
+    inv_model: itemData.inv_model,
+    inv_year: itemData.inv_year,
+    inv_description: itemData.inv_description,
+    inv_image: itemData.inv_image,
+    inv_thumbnail: itemData.inv_thumbnail,
+    inv_price: itemData.inv_price,
+    inv_miles: itemData.inv_miles,
+    inv_color: itemData.inv_color,
+    classification_id: itemData.classification_id
+  });
+}
+
+/* ****************************************
+*  Process Update to vehicle data
+* *************************************** */
+invCont.updateInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+    inv_id,
+    classification_id, 
+    inv_make, 
+    inv_model, 
+    inv_description, 
+    inv_image, 
+    inv_thumbnail, 
+    inv_price, 
+    inv_year, 
+    inv_miles, 
+    inv_color
+   } = req.body
+  const updateResult = await invModel.updateInventory(
+    inv_id,
+    classification_id, 
+    inv_make, 
+    inv_model, 
+    inv_description, 
+    inv_image, 
+    inv_thumbnail, 
+    inv_price, 
+    inv_year, 
+    inv_miles, 
+    inv_color
+  )  
+
+  if (updateResult) {
+    const itemName = updateResult.inv_make + " " + updateResult.inv_model
+    req.flash("notice", `The ${itemName} was successfully updated.`)
+    res.redirect("/inv/")
+  } else {
+    const classificationSelect = await utilities.buildClassificationList(classification_id)
+    const itemName = `${inv_make} ${inv_model}`
+    req.flash("notice", "Sorry, the insert failed.")
+    res.status(501).render("inventory/editvehicle", {
+    title: "Edit " + itemName,
+    nav,
+    classificationSelect: classificationSelect,
+    errors: null,
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id
+    })
   }
 }
 

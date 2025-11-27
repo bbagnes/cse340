@@ -6,14 +6,24 @@
 
 <%- messages() %> 
 
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
 <div id="manageInv">
   <a href="/inv/addClass">Add New Classification</a>
-  <a href="/inv/addVehicle">Add New Vehicle</a>
-</div>
+  <a href="/inv/addVehicle">Add New Vehicle</a><br>
 
-<h2>Manage Inventory</h2>
-<p>Select Inventory Item by Classification:</p>
-<form><%- classList %></form>
-<table id="invDisplay"></table>
-<noscript>JavaScript must be enabled to use this page.</noscript>
-<script src="../../js/inventory.js"></script>
+
+  <h2>Manage Inventory</h2>
+  <p>Select Inventory Item by Classification:</p>
+  <%- classificationSelect %>
+
+  <table id="invDisplay"></table>
+  <noscript>JavaScript must be enabled to use this page.</noscript>
+  <script src="../../js/inventory.js"></script>
+</div>
