@@ -1,0 +1,36 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<div id="Form">  
+  <form action="/inv/deleteinventory" method="post">
+    
+    <fieldset>
+      <p>Verify Vehicle For Deletion; Deletion is Permanent.</p><br>
+      <label for="inv_make" aria-label="vehicle make">Make</label><br>
+      <input type="text" name="inv_make" id="inv_make" required pattern="[a-zA-Z0-9-]{3,}" readonly value="<%= locals.inv_make %>"><br>
+      <label for="inv_model" aria-label="vehicle model">Model</label><br>
+      <input type="text" name="inv_model" id="inv_model" required pattern="[A-Za-z0-9-]{3,}" readonly value="<%= locals.inv_model %>"><br>
+      <label for="inv_price" aria-label="Edit vehicle price; numbers only">Price</label><br>
+      <input type="text" name="inv_price" id="inv_price" pattern="^\d*\.\d{2}$" required readonly value="<%= locals.inv_price %>"><br>
+      <label for="inv_year" aria-label="Edit vehicle year">Year</label><br>
+      <input type="number" name="inv_year" id="inv_year" min="4" max="4" required readonly value="<%= locals.inv_year %>"><br>
+      <input id="submitButton" type="submit" name="submit" value="Delete Vehicle">
+      <input type="hidden" name="inv_id"
+      <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+      <% } %>>
+    </fieldset>    
+  </form>
+</div>
