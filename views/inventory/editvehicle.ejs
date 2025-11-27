@@ -31,9 +31,9 @@
       <label for="inv_thumbnail" aria-label="Edit thumbnail image file for this vehicle.">Thumbnail file</label><br>
       <input type="file" name="inv_thumbnail" id="inv_thumbnail" required value="<%= locals.inv_thumbnail %>"><br>
       <label for="inv_price" aria-label="Edit vehicle price; numbers only">Price</label><br>
-      <input type="text" name="inv_price" id="inv_price" pattern="^\d*\.\d{2}$" required placeholder="decimal or integer" value="<%= locals.inv_price %>"><br>
+      <input type="number" name="inv_price" id="inv_price" pattern="^\d*\.\d{2,}$" required placeholder="decimal or integer" value="<%= locals.inv_price %>"><br>
       <label for="inv_year" aria-label="Edit vehicle year">Year</label><br>
-      <input type="number" name="inv_year" id="inv_year" min="4" max="4" required placeholder="4-digit year" value="<%= locals.inv_year %>"><br>
+      <input type="number" name="inv_year" id="inv_year" min="1800" max="2350" required placeholder="4-digit year" value="<%= locals.inv_year %>"><br>
       <label for="inv_miles" aria-label="Enter the vehicle mileage, digits only">Mileage</label><br>
       <input type="number" name="inv_miles" id="inv_miles" required placeholder="digits only" value="<%= locals.inv_miles %>"><br>
       <label for="inv_color" aria-label="Edit vehicle color">Color</label><br>

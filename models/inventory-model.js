@@ -71,7 +71,6 @@ async function registerNewVehicle(classification_id, inv_make, inv_model, inv_de
  *  Update Inventory Data
  * ************************** */
 async function updateInventory(
-  inv_id,
   inv_make,
   inv_model,
   inv_description,
@@ -81,7 +80,8 @@ async function updateInventory(
   inv_year,
   inv_miles,
   inv_color,
-  classification_id
+  classification_id,
+  inv_id,
 ) {
   try {
     const sql =
