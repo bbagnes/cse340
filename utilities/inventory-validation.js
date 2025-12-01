@@ -47,7 +47,7 @@ validate.newVehicleRules = () => {
         .isLength({ min: 3 })
         .withMessage("Vehicle Make must use alphanumeric characters and be at least 3 characters in Length."), // on error this message is sent.
   
-      // A vehicel description is required and must be a string
+      // A vehicle description is required and must be a string
       body("inv_description")
       .trim()
       .escape()

@@ -161,13 +161,17 @@ div #Form {
   border-radius: 6px;
 }
 
+div #Form p {
+  margin: 10px;
+}
+
 div #invDisplay {
   display: block;
   align-content: space-around;
   justify-content: left;
   background-color: var(--accent3-color);
   color:var(--accent1-color);
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin: 10px auto;
   min-width: 280px;
   width: 80%;
@@ -178,10 +182,14 @@ div #invDisplay {
   border-radius: 6px;
 }
 
-div #Form label, div #Form input {
+div #Form label, div #Form input, div #Form select, div #Form textarea {
   height: 35px;
   width: 220px;
   margin: 10px;
+}
+
+div #Form textarea {
+  height: 120px;
 }
 
 input:focus:invalid {
@@ -443,8 +451,12 @@ div #error {
   picture div.delorean p.space {
   margin-bottom: 30px;
   }
-}
 
+
+  div #invDisplay {
+    font-size: 1.5rem;
+  }
+}
 @media screen and (min-width: 800px) {
 
   header, nav, main, footer{

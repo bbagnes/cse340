@@ -19,7 +19,7 @@
     <p>ALL FIELDS ARE REQUIRED.</p><br>
     <fieldset>
     <label for="classification_id" aria-label="Select a classification">Classification</label><br>
-    <%- classList %><br>
+    <%- classificationSelect %><br>
     <label for="inv_make" aria-label="Enter the make">Make</label><br>
     <input type="text" name="inv_make" id="inv_make" required pattern="[a-zA-Z0-9-]{3,}" placeholder="Min of 3 characters" value="<%= locals.inv_make %>"><br>
     <label for="inv_model" aria-label="Enter the model">Model</label><br>
