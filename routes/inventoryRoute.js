@@ -17,7 +17,7 @@ router.get("/detail/:vehicleId", utilities.handleErrors(invController.buildVehic
 // Route to build the Add New Classification view
 router.get("/addClass", utilities.handleErrors(invController.buildNewClassificationView));
 
-// Route to Add New Classification view
+// Route to Add New Classification
 router.post("/addClass/",
     invValidate.classificationRules,
     invValidate.checkNewClassificationData,

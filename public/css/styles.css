@@ -189,7 +189,7 @@ div #Form label, div #Form input, div #Form select, div #Form textarea {
 }
 
 div #Form textarea {
-  height: 120px;
+  height: 140px;
 }
 
 input:focus:invalid {

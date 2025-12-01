@@ -72,19 +72,18 @@ invCont.buildNewVehicleView = async function (req, res, next) {
 *  Process new classification Registration
 * *************************************** */
 invCont.addNewClassification = async function (req, res) {
-  let nav = await utilities.getNav()
+  let nav = await utilities.getNav();
+  const classificationSelect = await utilities.buildClassificationList();
   const { } = req.body
-  const regResult = await invModel.registerClassification(
-    classification_name, 
-  )  
+  const regResult = await invModel.addNewClassification(classification_name);
 
   if (regResult) {
     req.flash(
       "notice",
       `Congratulations, the ${classification_name} Class was sucessfully added.`
     )
-    res.status(201).render("/inventory/management", {
-      title: "Vehicle Management", nav, errors: null, })
+    res.status(201).render("/inventory/invmanagement", {
+      title: "Vehicle Management", nav, errors: null, classificationSelect, })
   } else {
     req.flash("notice", "Sorry, the vehicle registration failed.")
     res.status(501).render("inventory/addclassification", {

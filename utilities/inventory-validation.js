@@ -15,7 +15,7 @@ const utilities = require(".")
         .escape()
         .notEmpty()
         .isLength({ min: 3 })
-        .withMessage("Please provide a Classification Name using alphabtic characters, and a minimum of 3 characters in length."), // on error this message is sent.
+        .withMessage("Please provide a Classification Name using alphabtic characters; and a minimum of 3 characters in length."), // on error this message is sent.
     ]
   };
 

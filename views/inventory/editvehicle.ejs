@@ -35,7 +35,7 @@
       <label for="inv_year" aria-label="Edit vehicle year">Year</label><br>
       <input type="number" name="inv_year" id="inv_year" min="1800" max="2350" required placeholder="4-digit year" value="<%= locals.inv_year %>"><br>
       <label for="inv_miles" aria-label="Enter the vehicle mileage, digits only">Mileage</label><br>
-      <input type="number" name="inv_miles" id="inv_miles" required placeholder="digits only" value="<%= locals.inv_miles %>"><br>
+      <input type="number" name="inv_miles" id="inv_miles" required min="0" placeholder="digits only" value="<%= locals.inv_miles %>"><br>
       <label for="inv_color" aria-label="Edit vehicle color">Color</label><br>
       <input type="text" name="inv_color" id="inv_color" required value="<%= locals.inv_color %>"><br>
       <input id="submitButton" type="submit" name="submit" value="Update Vehicle">
