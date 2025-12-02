@@ -2,7 +2,6 @@
 const utilities = require(".")
   const { body, validationResult } = require("express-validator")
   const validate = {}
-  const invModel = require("../models/inventory-model");
 
 /*  **********************************
   *  New Classification Data Validation Rules
@@ -15,7 +14,8 @@ const utilities = require(".")
         .escape()
         .notEmpty()
         .isLength({ min: 3 })
-        .withMessage("Please provide a Classification Name using alphabtic characters; and a minimum of 3 characters in length."), // on error this message is sent.
+        .withMessage("Classification Name must use a minimum of 3 alphabtic characters."), // on error this message is sent.
+      console.log("Rules check Sat.")
     ]
   };
 
@@ -88,6 +88,8 @@ validate.newVehicleRules = () => {
         .notEmpty()
         .isLength({ min: 3 })
         .withMessage("Please provide the vehicle color."), // on error this message is sent.
+
+      console.log("Rules check Sat.")
     ]
 };
 
@@ -95,19 +97,21 @@ validate.newVehicleRules = () => {
  * Check data and return errors or continue to registration
  * ***************************** */
 validate.checkNewClassificationData = async (req, res, next) => {
-  const { classification_name} = req.body
+  const { classification_name } = req.body
+  console.log(req.body);
   let errors = []
-  errors = validationResult(req)
+  errors = validationResult(req.body)
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
     res.render("inventory/addClassfication", {
       errors,
       title: "Add New Classification",
       nav,
-      classification_name,
+      classification_name: classification_name,
     })
     return
   }
+  console.log("Data Check, Check Sat.")
   next()
 };
 
@@ -137,6 +141,7 @@ validate.checkNewVehicleData = async (req, res, next) => {
     })
     return
   }
+  console.log("Data Check, Check Sat.")
   next()
 };
 

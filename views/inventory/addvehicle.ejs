@@ -31,7 +31,7 @@
     <label for="inv_thumbnail" aria-label="Please select the thumbnail image file for this vehicle.">Thumbnail Path</label><br>
     <input type="file" name="inv_thumbnail" id="inv_thumbnail" required value="/images/vehicles/no-image-tn.png"><br>
     <label for="inv_price" aria-label="Enter vehicle price without a dollar sign or comma.">Price</label><br>
-    <input type="text" name="inv_price" id="inv_price" pattern="^\d*\.\d{2}$" required placeholder="decimal or integer" value="<%= locals.inv_price %>"><br>
+    <input type="number" name="inv_price" id="inv_price" required placeholder="decimal or integer" value="<%= locals.inv_price %>"><br>
     <label for="inv_year" aria-label="Enter the four digit vehicle year">Year</label><br>
     <input type="number" name="inv_year" id="inv_year" min="1890" max="2350" required placeholder="4-digit year" value="<%= locals.inv_year %>"><br>
     <label for="inv_miles" aria-label="Enter the vehicle mileage, digits only">Mileage</label><br>
