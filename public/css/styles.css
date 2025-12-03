@@ -497,6 +497,7 @@ div #error {
   #vehicle-display {
     display: flex;
     font-size: larger;
+    border: var(--border1);
   }
 
   section.vehImage {
@@ -509,6 +510,7 @@ div #error {
   section.vehicleDetail {
     display: inline-block;
     padding: 5px;
+    background-color: var(--accent3-color);
   }
 }
 
