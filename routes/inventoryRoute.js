@@ -19,7 +19,7 @@ router.get("/addClass", utilities.handleErrors(invController.buildNewClassificat
 
 // Route to Add New Classification
 router.post("/addClass",
-    invValidate.classificationRules,
+    // invValidate.classificationRules,
     invValidate.checkNewClassificationData,
     utilities.handleErrors(invController.addNewClassification));
 
@@ -29,7 +29,7 @@ router.get("/addVehicle", utilities.handleErrors(invController.buildNewVehicleVi
 // Route to Add a New Vehichle to Inventory
 router.post("/addVehicle",
     // invValidate.newVehicleRules,
-    // invValidate.checkNewVehicleData,
+    invValidate.checkNewVehicleData,
     utilities.handleErrors(invController.addNewVehicle));
 
 // Route to manage inventory items 

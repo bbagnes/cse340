@@ -6,30 +6,29 @@ const utilities = require(".")
 /*  **********************************
   *  New Classification Data Validation Rules
   * ********************************* */
-  validate.classificationRules = () => {
-    return [
-      // calssification name is required and must be string
-      body("classification_name")
-        .trim()
-        .escape()
-        .notEmpty()
-        .isLength({ min: 3 })
-        .withMessage("Classification Name must use a minimum of 3 alphabtic characters."), // on error this message is sent.
-      console.log("Rules check Sat.")
-    ]
-  };
+validate.classificationRules = () => {
+  return [
+     // calssification name is required and must be string
+    body("classification_name")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 3 })
+      .withMessage("Classification Name must use a minimum of 3 characters, alphabtic only."), // on error this message is sent.
+  ]
+};
 
   /*  **********************************
 *  New Vehicle Registration Validation Rules
 * ********************************* */
 validate.newVehicleRules = () => {
-    return [
+  return [
       
-      //model is required and must be a string
-      body("classification_id")
-        .notEmpty()
-        .isLength({ min: 1 })
-        .withMessage("Please select a classification."),
+     //model is required and must be a string
+    body("classification_id")
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage("Please select a classification."),
 
       // model is required and must be a string
       body("inv_model")
@@ -69,8 +68,8 @@ validate.newVehicleRules = () => {
         .escape()
         .notEmpty()
         .isNumeric()
-        .isLength(4)
-        .withMessage("Please provide a four digit Vehicle YSear."), // on error this message is sent.
+        .isLength({min: 1800,max: 2350 })
+        .withMessage("Please provide a four digit Vehicle Year."), // on error this message is sent.
       
         // Make is required and must be string
       body("inv_miles")
@@ -88,8 +87,6 @@ validate.newVehicleRules = () => {
         .notEmpty()
         .isLength({ min: 3 })
         .withMessage("Please provide the vehicle color."), // on error this message is sent.
-
-      console.log("Rules check Sat.")
     ]
 };
 
@@ -98,16 +95,16 @@ validate.newVehicleRules = () => {
  * ***************************** */
 validate.checkNewClassificationData = async (req, res, next) => {
   const { classification_name } = req.body
-  console.log(req.body);
+  console.log(`This is the body: ${req.body}`);
   let errors = []
-  errors = validationResult(req.body)
+  errors = validationResult(req)
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
     res.render("inventory/addClassfication", {
       errors,
       title: "Add New Classification",
       nav,
-      classification_name: classification_name,
+      classification_name,
     })
     return
   }
