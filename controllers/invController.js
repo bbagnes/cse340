@@ -39,7 +39,7 @@ invCont.buildVehicleView = async function (req, res, next) {
 invCont.buildManagementView = async function (req, res, next) {
   let nav = await utilities.getNav();
   const classificationSelect = await utilities.buildClassificationList();
-  const vehicleTitle = "Vehicle Management";
+  const vehicleTitle = "Manage Inventory";
   res.render("./inventory/invmanagement", {
     title: vehicleTitle, nav, errors: null, classificationSelect,
   });
@@ -117,8 +117,7 @@ invCont.addNewVehicle = async function (req, res) {
     inv_year, 
     inv_miles, 
     inv_color
-  )  
-  console.log(regResult);
+  )
 
   if (regResult) {
     let nav = await utilities.getNav();

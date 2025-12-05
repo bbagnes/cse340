@@ -152,7 +152,7 @@ Util.checkJWTToken = (req, res, next) => {
  }
 };
 
-/* ****************************************
+ /* ****************************************
  *  Check Login
  * ************************************ */
  Util.checkLogin = (req, res, next) => {
@@ -160,6 +160,19 @@ Util.checkJWTToken = (req, res, next) => {
     next()
   } else {
     req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+ };
+
+/* ********************************************
+ *  Check User Authorization to access content
+ * ****************************************** */
+ Util.checkAuthorization = (req, res, next) => {
+  let authorized = res.locals.accountData.account_type; 
+  if (authorized === "Admin" || authorized === "Employee") {
+    next()
+  } else {
+    req.flash("notice", "Authorized Users Only! Please Log In With An Authorized Account.")
     return res.redirect("/account/login")
   }
  };

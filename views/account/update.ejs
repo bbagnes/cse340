@@ -1,0 +1,53 @@
+<!-- Generate a title with values created in the controller, or return the home view. -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+
+<div id="Form">
+  <h3>Account Update</h3>
+    <form action="/account/update" id="updateForm" method="post">
+      <label for="account_firstname">First Name:</label><br>
+      <input type="text" name="account_firstname" id="account_firstname" required 
+        pattern="[A-Za-z]{3,}" aria-label="Update your First Name" 
+        value="<%= locals.account_firstname %>"><br>
+      <label for="account_lastname">Last Name:</label><br>
+      <input type="text" name="account_lastname" id="account_lastname" required
+         pattern="[A-Za-z]{3,}" aria-label="Update your Last Name" 
+         value="<%= locals.account_lastname %>"><br>
+      <label for="account_email">Email Address:</label><br>
+      <input type="email" name="account_email" id="account_email" required 
+         placeholder="Enter a valid email address" aria-label="Update your Email" 
+         value="<%= locals.account_email %>"><br>
+      <input id="submitButton" type="submit" value="Update Account">
+      <input type="hidden" name="account_id"
+      <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+      <% } %>> 
+    
+    </form>
+  </div>
+  <div id="Forms">
+    <h3>Change Password</h3>
+    <form action="/account/changepassword" method="post">     
+      <label for="account_password">Password:</label><br>
+      <input type="password" name="account_password" id="account_password" required
+         pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" 
+         aria-label="Select a new account Password"><br>
+      <p>Password must be a minimun of 12 characters and include 1 capitol letter, 1 number and 1 special character.</p><br>
+      <input id="submitbutton" type="submit" value="Change Password"> 
+      <input type="hidden" name="account_id"
+      <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+      <% } %>> 
+    </form>
+</div>

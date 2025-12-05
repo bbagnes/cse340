@@ -69,6 +69,11 @@ header {
   justify-content: space-between;  
 }
 
+#tools a:hover {
+  background-color: var(--nav-hover-background-color);
+  padding: 5px;
+}
+
 header span.siteName a { 
   font-size: 1.8rem;
   font-family: var(--heading-font);
@@ -143,7 +148,7 @@ h1 {
   color: red;
 }
 
-div #Form {
+div #Form, div #Forms {
   display: block;
   align-content: space-around;
   justify-content: center;
@@ -161,7 +166,7 @@ div #Form {
   border-radius: 6px;
 }
 
-div #Form p {
+div #Form p, div #Forms p {
   margin: 10px;
 }
 
@@ -182,7 +187,12 @@ div #invDisplay {
   border-radius: 6px;
 }
 
-div #Form label, div #Form input, div #Form select, div #Form textarea {
+div #acctManagement {
+  align-items:self-start;
+  display: grid;
+}
+
+div #Form label, div #Form input, div #Form select, div #Form textarea, div #Forms input {
   height: 35px;
   width: 220px;
   margin: 10px;
@@ -204,10 +214,11 @@ div #loginForm p, div #registerForm p {
   margin: 0 10px;
 }
 
-div #submitButton {
+div #submitButton, div #submitbutton {
   justify-self:center;
   text-align: center;
-  max-width: 180px;
+  width: auto;
+  max-width: 200px;
   font-size: 1.2rem;
   font-weight: 600;
   padding: 5px;
@@ -360,21 +371,20 @@ div.namePrice span {
   font-weight: 800;
 }
 
-div #manageInv {
+div #manageInv, div #manageAcct {
   display: block;
   width: 100%;
   margin: 10px;
   padding: 10px;   
 }
 
-#manageInv a {
-  display: block;
-  padding: 2px;
+#manageAcct h1 {
+  font-size: 1.5rem;
 }
 
-#manageAcc {
-  font-size: larger;
-  font-weight: 700;
+#manageInv a, #manageAcct a {
+  display: block;
+  padding: 2px;
 }
 
 section.vehImage {
@@ -402,6 +412,11 @@ footer {
 
 footer a, .copyright {
   line-height: 0;
+}
+
+footer #contact {
+  position: absolute;
+  right: 10px;
 }
 
 div #error {

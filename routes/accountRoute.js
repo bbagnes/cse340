@@ -2,7 +2,7 @@ const express = require("express");
 const router = new express.Router();
 const accountController = require("../controllers/accountController");
 const utilities = require("../utilities/");
-const regValidate = require("../utilities/account-validation");
+const acctValidate = require("../utilities/account-validation");
 
 // Route to Account View.
 router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountView));
@@ -16,17 +16,33 @@ router.get("/register", utilities.handleErrors(accountController.buildRegistrati
 // Route to process registration data
 router.post(
     '/register',
-    regValidate.registationRules(),
-    regValidate.checkRegData,    
+    acctValidate.registationRules(),
+    acctValidate.checkRegData,    
     utilities.handleErrors(accountController.registerAccount)
 );
 
 // Process the login attempt
 router.post(
   "/login",
-  regValidate.loginRules(),
-  regValidate.checkLoginData,
+  acctValidate.loginRules(),
+  acctValidate.checkLoginData,
   utilities.handleErrors(accountController.accountLogin)
 );
+
+// Edit Account information view
+router.get("/update/:account_id", utilities.handleErrors(accountController.editAccountView));
+
+// Update Account: name or email
+router.post("/update/", 
+  acctValidate.UpdateAccountRules(),
+  acctValidate.checkUpdateData,
+  utilities.handleErrors(accountController.updateAccount));
+
+  router.post("update/changepassword",
+    
+    utilities.handleErrors(accountController.changePassword));
+
+// Logout out of server, redirect to Home View
+router.get("/logout", utilities.handleErrors(accountController.accountLogout));
 
 module.exports = router;
