@@ -15,16 +15,31 @@
 <% } %>
 
 <div id="Form">
-    <form action="/account/register" method="post">
-      <label for="account_firstname" aria-label="Enter your First Name" >First Name:</label><br>
-      <input type="text" name="account_firstname" id="account_firstname" required pattern="[A-Za-z]{3,}" value="<%= locals.account_firstname %>"><br>
-      <label for="account_lastname" aria-label="Enter your Last Name">Last Name:</label><br>
-      <input type="text" name="account_lastname" id="account_lastname" required pattern="[A-Za-z]{3,}" value="<%= locals.account_lastname %>"><br>
-      <label for="account_email" aria-label="Enter your Email">Email Address:</label><br>
-      <input type="email" name="account_email" id="account_email" required placeholder="Enter a valid email address" value="<%= locals.account_email %>"><br>
-      <label for="account_password" aria-label="Select an account Password">Password:</label><br>
-      <input type="password" name="account_password" id="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"><br>
-      <p>Password must be a minimun of 12 characters and include 1 capitol letter, 1 number and 1 special character.</p><br>
-      <input id="submitButton" type="submit" value="Register">    
+    <form action="/contact/sendMessage" method="post">
+      <p>Comment, Question, Suggestion, or Complaint? Send it here:<br>
+        <small>ALL FIELDS ARE REQUIRED.</small></p><br>
+      <label for="contact_firstname" >First Name:</label><br>
+      <input type="text" name="contact_firstname" id="contact_firstname" required
+       pattern="[A-Za-z]{3,}" aria-label="Enter your First Name" value="<%= locals.contact_firstname %>"><br>
+      <label for="contact_lastname" >Last Name:</label><br>
+      <input type="text" name="contact_lastname" id="contact_lastname" required
+       pattern="[A-Za-z]{3,}" aria-label="Enter your Last Name" value="<%= locals.contact_lastname %>"><br>
+      <label for="contact_email">Email Address:</label><br>
+      <input type="email" name="contact_email" id="contact_email" required
+       placeholder="Enter a valid email address" aria-label="Enter your Email" value="<%= locals.contact_email %>"><br>
+            
+      <label for="message_type">Message Type:</label><br>
+      <select id="message_type" name="message_type" required>
+        <option value="">Select a Message Type</option>
+        <option value="comment">Comment</option>
+        <option value="question">Question</option>
+        <option value="suggestion">Suggestion</option>
+        <option value="complaint">Complaint</option>
+      </select><br>     
+      <label for="message_content" >Message:</label><br>
+      <textarea name="message_content" id="message_content" required
+        aria-label="Tell us your comment, question, complaint, or suggestion."
+        placeholder="Character Limit: 300." maxlength="300"></textarea><br>
+      <input id="submitButton" type="submit" aria-label="Send us your comment, question, complaint, or suggestion." value="Send">    
     </form>
 </div>

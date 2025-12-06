@@ -59,7 +59,7 @@ async function editAccountView(req, res, next) {
   };
 
 /* ****************************************
-*  Process Registration
+*  Process Account Registration
 * *************************************** */
 async function registerAccount(req, res) {
   let nav = await utilities.getNav()
@@ -207,7 +207,16 @@ async function changePassword(req, res) {
     hashedPassword = await bcrypt.hashSync(account_password, 10);
   } catch (error) {
     req.flash("notice", 'Sorry, there was an error changing the password.')
-    res.status(500).render("account/update");
+    const accountData = await accountModel.getAccountById(account_id);
+    res.render("./account/update", {
+      title: "Update Account",
+      nav,
+      errors: null,
+      account_firstname: accountData.account_firstname,
+      account_lastname: accountData.account_lastname,
+      account_email: accountData.account_email,
+      account_id: accountData.account_id
+    });
   }
 
   const regResult = await accountModel.changePassword(
@@ -224,7 +233,7 @@ async function changePassword(req, res) {
       title: "Manage Account",
       nav,
       errors: null,
-    });
+    })
   } else {
     req.flash("notice", "Sorry, the Password Update failed.")
     const accountData = await accountModel.getAccountById(account_id);
@@ -261,4 +270,4 @@ module.exports = {
   updateAccount,
   accountLogout,
   changePassword
-}
+};

@@ -18,7 +18,7 @@ const session = require("express-session");
 const pool = require('./database/');
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const contactRoute = require("../routes/contactRoute");
+const contactRoute = require("./routes/contactRoute");
 
 /* ***********************
  * Middleware

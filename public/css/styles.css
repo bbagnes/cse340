@@ -167,7 +167,14 @@ div #Form, div #Forms {
 }
 
 div #Form p, div #Forms p {
+  font-size: 1.5rem;
   margin: 10px;
+}
+
+div #Form input[type="radio"] {
+  width: 15px;
+  height: 15px; 
+  accent-color: var(--accent1-color);
 }
 
 div #invDisplay {
@@ -202,7 +209,7 @@ div #Form textarea {
   height: 140px;
 }
 
-input:focus:invalid {
+input:focus:invalid, textarea:focus:invalid {
   background-color: rgba(249, 57, 57, .7);
 }
 
@@ -257,7 +264,7 @@ div.delorean {
   font-size: medium;
   position: absolute;
   text-align: left;
-  top: 160px;
+  top: 180px;
   left: 20px;
   width: auto;
   height: 93px;
@@ -312,7 +319,6 @@ div.upgrades {
   grid-template-areas: 
         "capacitor decals"
         "stickers caps";
-  grid-gap: 10px;
   max-width: 320px;
   font-family: var(--paragraph-font);
   background-color: var(--accent3-color);
@@ -407,16 +413,33 @@ li.vehDesc {
 }
 
 footer {
+  display: grid;
+  grid-template-areas:
+    "copyright contact"
+    "error error";
   padding: 5px;
+  padding-bottom: 15px;
+  line-height: 0.2;
 }
 
-footer a, .copyright {
-  line-height: 0;
+footer a.copyright, footer #contact {
+  margin: 5px;
 }
 
-footer #contact {
-  position: absolute;
-  right: 10px;
+footer a #errorlink {
+  grid-area: error;
+  padding: 5px;
+  margin: 5px;
+}
+
+a.copyright {
+  grid-area: copyright;
+}
+
+#contact {
+  grid-area: contact;
+  padding-top: 5px;
+  text-align: end;
 }
 
 div #error {
@@ -453,6 +476,10 @@ div #error {
     justify-content: center;    
     padding: 10px;
   }  
+
+  div.upgrades {
+    grid-gap: 10px;
+  }
 
   div.delorean {
   top: 200px;
@@ -526,6 +553,10 @@ div #error {
     display: inline-block;
     padding: 5px;
     background-color: var(--accent3-color);
+  }
+
+  #contact {
+    margin-right: 15px;
   }
 }
 

@@ -5,7 +5,9 @@ const utilities = require("../utilities/");
 const acctValidate = require("../utilities/account-validation");
 
 // Route to Account View.
-router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountView));
+router.get("/", 
+  utilities.checkLogin,
+   utilities.handleErrors(accountController.buildAccountView));
 
 // Route to build inventory by classification view
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
@@ -38,8 +40,9 @@ router.post("/update/",
   acctValidate.checkUpdateData,
   utilities.handleErrors(accountController.updateAccount));
 
-  router.post("update/changepassword",
-    
+  router.post("/changepassword",
+    acctValidate.changePasswordRules(),
+    acctValidate.checkPasswordChangeData,
     utilities.handleErrors(accountController.changePassword));
 
 // Logout out of server, redirect to Home View

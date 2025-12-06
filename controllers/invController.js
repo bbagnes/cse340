@@ -119,9 +119,7 @@ invCont.addNewVehicle = async function (req, res) {
     inv_color
   )
 
-  if (regResult) {
-    let nav = await utilities.getNav();
-    const classificationSelect = await utilities.buildClassificationList();  
+  if (regResult) { 
     req.flash(
       "notice",
       `Congratulations, the ${inv_make} ${inv_model} was sucessfully added.`);

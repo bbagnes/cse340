@@ -168,7 +168,7 @@ validate.checkLoginData = async (req, res, next) => {
  * Check Updated Account data and return errors or Update
  * ***************************************************** */
 validate.checkUpdateData = async (req, res, next) => {
-  const { account_firstname, account_lastname, account_email, account_id } = req.body
+  const { account_firstname, account_lastname, account_email } = req.body
   let errors = []
   errors = validationResult(req)
   if (!errors.isEmpty()) {
@@ -215,7 +215,17 @@ validate.checkPasswordChangeData = async (req, res, next) => {
   let errors = []
   errors = validationResult(req)
   if (!errors.isEmpty()) {
-    res.redirect("account/update")
+    let nav = await utilities.getNav();
+    const accountData = await accountModel.getAccountById(account_id);
+        res.render("account/update", {
+          title: "Update Account",
+          nav,
+          errors,
+          account_firstname: accountData.account_firstname,
+          account_lastname: accountData.account_lastname,
+          account_email: accountData.account_email,
+          account_id: accountData.account_id
+        });
     return
   }
   next()

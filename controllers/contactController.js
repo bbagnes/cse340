@@ -13,4 +13,62 @@ contCont.buildContactView = async function (req, res, next) {
   });
 };
 
+/* ****************************************
+*  Add Contact Message to Database
+* *************************************** */
+contCont.addContactMessage = async function (req, res) {
+  let nav = await utilities.getNav() 
+  let message_access = "";
+  let message_status = "pending";
+  let { 
+    contact_firstname, 
+    contact_lastname, 
+    contact_email, 
+    message_type, 
+    message_content} = req.body;
+    console.log(message_type);
+
+  if (message_type == "question") {
+      message_access = "Employee";
+  } else {
+    message_access = "Admin";
+  }    
+
+  const commentResult = await contactModel.addContactMessage(
+    contact_firstname, 
+    contact_lastname, 
+    contact_email, 
+    message_type,
+    message_content, 
+    message_access,
+    message_status    
+  )
+
+  if (commentResult) { 
+    console.log(commentResult);
+    req.flash(
+      "notice",
+      `Thank you ${commentResult.contact_firstname}, your message has been received.<br> Typical response time is 3-5 business days.`);
+    res.redirect("/");
+  } else {
+    req.flash("notice", "Sorry, your message failed to process, please try again.");
+    res.status(501).render("./contact/", {
+    title: "Contact Us", nav, errors: null,
+    });
+  }
+}
+
+/* ***************************
+ *  Build Review Messages View
+ * ************************** */
+contCont.reviewMessages = async function (req, res, next) {
+  const data = await contactModel.reviewMessages();
+  console.table(data);
+  const messageGrid = await utilities.buildMessageGrid(data);
+  let nav = await utilities.getNav();
+  res.render("./account/reviewmessages", {
+    title: "Reiew Messages", nav, messageGrid, errors: null
+  });
+}
+
 module.exports = contCont;
