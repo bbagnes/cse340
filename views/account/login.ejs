@@ -16,10 +16,12 @@
 
 <div id="Form">
     <form action="/account/login" method="post">
-      <label for="account_email" aria-label="Account Email">Email:</label><br>
-      <input type="email" name="account_email" id="account_email" required value="<%= locals.account_email %>"><br>
-      <label for="account_password" aria-label="Account Password">Password:</label><br>
-      <input type="password" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"><br>
+      <label for="account_email">Email:</label><br>
+      <input type="email" name="account_email" id="account_email" required
+       aria-label="Account Email" value="<%= locals.account_email %>"><br>
+      <label for="account_password">Password:</label><br>
+      <input type="password" name="account_password" required aria-label="Account Password"
+       pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"><br>
       <p>Password must be a minimun of 12 characters and include 1 capitol letter, 1 number and 1 special character.</p><br>
       <input id="submitButton" type="submit" value="Login">    
     </form>
