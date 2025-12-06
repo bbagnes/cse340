@@ -223,7 +223,8 @@ Util.buildMessageGrid = async function(data){
   messageGrid += '<tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Message Type</th><th>Message</th><th>Message Status></tr>'; 
   messageGrid += '</thead>';
   messageGrid += '<tbody>'; 
-  
+
+  console.log(data.type);
   data.forEach(message => { 
     messageGrid += `<tr><td>${message.contact_firstname}</td>`; 
     messageGrid += `<td>${message.contact_lastname}</td>`; 

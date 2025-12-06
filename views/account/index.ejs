@@ -17,11 +17,11 @@
     if (authorized === "Admin" || authorized === "Employee"){ %>
       <h2>Welcome <%- locals.accountData.account_firstname %></h2>
       <p>You're logged in.</p>
-      <a href="/account/update/<%- locals.accountData.account_id %>">Edit Account Information</a>
+      <a href="/account/update/<%- locals.accountData.account_id %>/">Edit Account Information</a>
       <h3>Inventory Management</h3>
       <p><a title="Manage Inventory" href="/inv">Manage Inventory</a></p>
       <h3>Manage messages</h3>
-      <p><a title="Resolve Messages" href="/contact/messages">Resolve Messages</a></p>
+      <p><a title="Resolve Messages" href="/contact/messages/<%- locals.accountData.account_type %>">Resolve Messages</a></p>
     <%}else{%>
       <h2>Welcome <%- locals.accountData.account_firstname %></h2>
       <p>You're logged in.</p>

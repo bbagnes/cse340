@@ -26,17 +26,17 @@ async function addContactMessage(
     console.log(data.rows[0]);
     return data.rows[0];
   } catch (error) {
-    return error.message
+    return error.message;
   }
 };
 
 /* **************************************
 *   Insert Contact Message into database
 * ************************************* */
-async function reviewMessages(){    
+async function reviewMessages(account_type){    
   try {
-    const authorized = locals.accountData.account_type; 
-    if (authorized === "Admin") {
+    console.log('This is the type: ' + authorized);
+    if (account_type === "Admin") {
     const data = await pool.query(
       `SELECT * FROM public.contact
        WHERE message_status = 'pending'
@@ -50,11 +50,12 @@ async function reviewMessages(){
        WHERE message_status = 'pending' AND message_access = 'Employee'
        LIMIT 10`,
     )
-    console.table(data);
+    console.table(data.rows);
     return data.rows
   }
   } catch (error) {
-    console.error("reviewMessages error " + error)
+    console.error("reviewMessages error: " + error)
+    return error.message;
   }
 };
 

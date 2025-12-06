@@ -45,6 +45,7 @@ async function buildRegistrationView(req, res, next) {
 * *************************************** */
 async function editAccountView(req, res, next) {
     const accountId = parseInt(req.params.account_id);
+    utilities.checkAuthorization
     let nav = await utilities.getNav()
     const accountData = await accountModel.getAccountById(accountId);
     res.render("./account/update", {

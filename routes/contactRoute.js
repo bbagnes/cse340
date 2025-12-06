@@ -11,8 +11,8 @@ router.get("/", utilities.handleErrors(contactController.buildContactView));
 router.post("/sendMessage", utilities.handleErrors(contactController.addContactMessage));
 
 // Route to view Review Messages View.
-router.get("/messages", 
-    utilities.checkAuthorization, // Verify users is authorized to access this page.
+router.get("/messages/:account_type",
+    utilities.checkAuthorization,
     utilities.handleErrors(contactController.reviewMessages));
 
 // Route to Resolve Messages

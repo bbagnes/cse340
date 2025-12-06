@@ -62,7 +62,9 @@ contCont.addContactMessage = async function (req, res) {
  *  Build Review Messages View
  * ************************** */
 contCont.reviewMessages = async function (req, res, next) {
-  const data = await contactModel.reviewMessages();
+  const account_type = parseInt(req.params.account_type); 
+  console.log('This is authorized value: ' + account_id);
+  const data = await contactModel.reviewMessages(account_type);
   console.table(data);
   const messageGrid = await utilities.buildMessageGrid(data);
   let nav = await utilities.getNav();
