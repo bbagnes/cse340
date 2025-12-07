@@ -62,15 +62,31 @@ contCont.addContactMessage = async function (req, res) {
  *  Build Review Messages View
  * ************************** */
 contCont.reviewMessages = async function (req, res, next) {
-  const account_type = parseInt(req.params.account_type); 
-  console.log('This is authorized value: ' + account_id);
+  const account_type = (req.params.account_type); 
+  console.log('This is authorized value: ' + account_type);
   const data = await contactModel.reviewMessages(account_type);
   console.table(data);
   const messageGrid = await utilities.buildMessageGrid(data);
   let nav = await utilities.getNav();
-  res.render("./account/reviewmessages", {
+  res.render("./contact/reviewmessages", {
     title: "Reiew Messages", nav, messageGrid, errors: null
   });
 }
+
+/* ***************************
+ *  Process Resolve Messages 
+ * ************************** */
+contCont.resolveMessage = async function (req, res, next) {
+  const account_type = (req.params.account_type); 
+  console.log('This is authorized value: ' + account_type);
+  const data = await contactModel.reviewMessages(account_type);
+  // console.table(data);
+  let messageGrid = await utilities.buildMessageGrid(data);
+  const nav = await utilities.getNav();
+  res.render("./contact/reviewmessages", {
+    title: "Review Messages", nav, errors: null, messageGrid,
+  });
+}
+
 
 module.exports = contCont;

@@ -12,11 +12,11 @@ router.post("/sendMessage", utilities.handleErrors(contactController.addContactM
 
 // Route to view Review Messages View.
 router.get("/messages/:account_type",
-    utilities.checkAuthorization,
+    // utilities.checkAuthorization,
     utilities.handleErrors(contactController.reviewMessages));
 
 // Route to Resolve Messages
-router.get("/resolveMessage", 
+router.post("/resolveMessage", 
     utilities.checkAuthorization, // Verify users is authorized to access this page.
     utilities.handleErrors(contactController.resolveMessage));
 

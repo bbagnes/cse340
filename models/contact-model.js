@@ -35,22 +35,20 @@ async function addContactMessage(
 * ************************************* */
 async function reviewMessages(account_type){    
   try {
-    console.log('This is the type: ' + authorized);
     if (account_type === "Admin") {
     const data = await pool.query(
       `SELECT * FROM public.contact
        WHERE message_status = 'pending'
        LIMIT 10`,
     )
-    console.table(data);
-    return data.rows
+    return data.rows;
   } else {
     const data = await pool.query(
       `SELECT * FROM public.contact
        WHERE message_status = 'pending' AND message_access = 'Employee'
        LIMIT 10`,
     )
-    console.table(data.rows);
+    // console.table(data.rows);
     return data.rows
   }
   } catch (error) {
