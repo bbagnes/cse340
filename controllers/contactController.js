@@ -48,7 +48,7 @@ contCont.addContactMessage = async function (req, res) {
     console.log(commentResult);
     req.flash(
       "notice",
-      `Thank you ${commentResult.contact_firstname}, your message has been received.<br> Typical response time is 3-5 business days.`);
+      `Thank you ${commentResult.contact_firstname}, your ${commentResult.message_type} has been received.<br> Typical response time is 3-5 business days.`);
     res.redirect("/");
   } else {
     req.flash("notice", "Sorry, your message failed to process, please try again.");
@@ -69,7 +69,7 @@ contCont.reviewMessages = async function (req, res, next) {
   const messageGrid = await utilities.buildMessageGrid(data);
   let nav = await utilities.getNav();
   res.render("./contact/reviewmessages", {
-    title: "Reiew Messages", nav, messageGrid, errors: null
+    title: "Review Messages", nav, messageGrid, errors: null
   });
 }
 
@@ -77,16 +77,23 @@ contCont.reviewMessages = async function (req, res, next) {
  *  Process Resolve Messages 
  * ************************** */
 contCont.resolveMessage = async function (req, res, next) {
-  const account_type = (req.params.account_type); 
-  console.log('This is authorized value: ' + account_type);
-  const data = await contactModel.reviewMessages(account_type);
-  // console.table(data);
-  let messageGrid = await utilities.buildMessageGrid(data);
-  const nav = await utilities.getNav();
-  res.render("./contact/reviewmessages", {
-    title: "Review Messages", nav, errors: null, messageGrid,
+  const contact_id = (req.body.contact_id); 
+  console.log('This is the Id: ' + contact_id);
+  const data = await contactModel.resolveMessage(contact_id);
+  console.log(`This is the db result: ${data}`);
+  if (data) {
+    data = data.message_access;
+   const messageGrid = await utilities.buildMessageGrid(data);
+    let nav = await utilities.getNav();
+    res.render("./contact/reviewmessages", {
+    title: "Reiew Messages", nav, messageGrid, errors: null
   });
+  }else {
+    req.flash("notice", "Sorry, your message update failed to process, please try again.");
+    res.status(501).render("./contact/", {
+    title: "Contact Us", nav, errors: null,
+    });
+  }
 }
-
 
 module.exports = contCont;

@@ -4,7 +4,7 @@ const utilities = require(".")
   const contactModel = require("../models/contact-model");
 
 /*  **********************************
-  *  Registration Data Validation Rules
+  *  Contact Message Validation Rules
   * ********************************* */
   validate.contactMessageRules = () => {
     return [
@@ -31,28 +31,46 @@ const utilities = require(".")
         .notEmpty()
         .isEmail()
         .normalizeEmail() // refer to validator.js docs
-        .withMessage("A valid email is required.")
+        .withMessage("A valid email is required."),
+       // A Message Type is required
+        body("message_content")
+        .trim()
+        .escape()
+        .notEmpty()
+        .withMessage("Please select a valid Message Type."), // on error this message is sent. 
+      // Message Content is required and must be string
+      body("message_content")
+        .trim()
+        .escape()
+        .notEmpty()
+        .isLength({ min: 3 })
+        .withMessage("Please provide more information."), // on error this message is sent.
     ]
 },
 
-/*  **********************************
-  *  Registration Data Validation Rules
-  * ********************************* */
-  validate.changePasswordRules = () => {
-    return [
-      // password is required and must be strong password
-      body("account_password")
-        .trim()
-        .notEmpty()
-        .isStrongPassword({
-          minLength: 12,
-          minLowercase: 1,
-          minUppercase: 1,
-          minNumbers: 1,
-          minSymbols: 1,
-        })
-        .withMessage("Password does not meet requirements."),
-    ]
-  };
+/* ********************************************************************
+ * Check Message Content and return errors or continue to registration
+ * ****************************************************************** */
+validate.checkMessageData = async (req, res, next) => {
+  const { contact_firstname, contact_lastname, contact_email, message_type, message_content } = req.body
+  let errors = []
+  errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    res.render("contact/", {
+      errors,
+      title: "Contact Us",
+      nav,
+      contact_firstname,
+      contact_lastname,
+      contact_email,
+      message_type,
+      message_content
+    })
+    return
+  }
+  next()
+};
+
 
   module.exports = validate;

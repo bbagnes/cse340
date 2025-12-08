@@ -185,29 +185,29 @@ Util.checkJWTToken = (req, res, next) => {
 Util.buildMessageGrid = async function(data){
  let messageGrid
   if(data.length > 0){
-  messageGrid = '<table>';
+  messageGrid = `<table>`
   messageGrid += '<thead>'; 
-  messageGrid += '<tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Message Type</th><th>Message</th><th>Message Status><th>Resolve</th></tr>'; 
+  messageGrid += '<tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Message Type</th><th>Message</th><th>Message Status<th>Resolve</th></tr>'; 
   messageGrid += '</thead>';
   messageGrid += '<tbody>'; 
-
-  console.log(data.type);
-  data.rows.forEach((message) => { 
+  data.forEach((message) => { 
     messageGrid += `<tr><td>${message.contact_firstname}</td>`; 
     messageGrid += `<td>${message.contact_lastname}</td>`; 
     messageGrid += `<td>${message.contact_email}</td>`;
     messageGrid += `<td>${message.message_type}</td>`;
-    messageGrid += `<td id="message">${message.message_content}</td>`;
+    messageGrid += `<td>${message.message_content}</td>`;
     messageGrid += `<td>${message.message_status}</td>`;
     messageGrid += `<td><form action="/contact/resolveMessage" method="post">`;
-    messageGrid += `<input id="submitButton" type="submit" aria-label="Mark message resolved." value="Resolve"></form></td></tr>`;    
-  }) 
+    messageGrid += `<input id="submitButton_${message.contact_id}" type="submit" aria-label="Mark message resolved." value="Resolved">`;
+    messageGrid += `<input type="hidden" name="contact_id" value="${message.contact_id}"></form></td></tr>`;
+        
+  });
   messageGrid += '</tbody>';
-  messageGrid += '</table>';
+  messageGrid += `</table>`;
   return messageGrid;
 
 } else { 
-  messageGrid = '<p class="notice">Congratulations, All Messages Have Been Resolved.</p>'
+  messageGrid = '<p>Congratulations, All Messages Have Been Resolved.</p>'
   return messageGrid;
   }
 };

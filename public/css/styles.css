@@ -449,6 +449,32 @@ div #error {
   margin: 10px;
 }
 
+#messages {
+  display: block;
+  width: 100%;
+}
+
+#messageTable table {
+  border: var(--border2);  
+  border-spacing: 0;
+}
+
+#messageTable tr:nth-child(odd) {
+  background-color: white; /* White for odd rows */
+  border-collapse: collapse;
+}
+
+#messageTable tr:nth-child(even) {
+  background-color: var(--accent3-color);
+  border-collapse: collapse;
+}
+
+#messageTable td {
+  border: var(--border1);
+}
+
+
+
 @media screen and (min-width: 560px) {
 
   header span.siteName a {

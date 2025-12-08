@@ -57,4 +57,19 @@ async function reviewMessages(account_type){
   }
 };
 
-module.exports = { addContactMessage, reviewMessages };
+/* **************************************
+*   Insert Contact Message into database
+* ************************************* */
+async function resolveMessage(contact_id){    
+  try {
+    const sql = "UPDATE contact SET message_status = 'resolved' WHERE contact_id = $1 RETURNING *"
+    const data = await pool.query(sql, [contact_id])
+    console.table(data.rows[0]);
+    return data.rows[0].message_access;
+  } catch (error) {
+    console.error("reviewMessages error: " + error)
+    return error.message;
+  }
+};
+
+module.exports = { addContactMessage, reviewMessages, resolveMessage };
